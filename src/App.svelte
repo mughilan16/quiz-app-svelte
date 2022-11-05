@@ -2,7 +2,8 @@
     import { questions } from "./data/questions";
     let score = 0;
     let isAnswered = false;
-    let questionData = questions[0];
+    let currentQuestion = 1;
+    $: questionData = questions[currentQuestion];
     function clickHandler(index: number) {
         isAnswered = true;
         questionData.answerList[questionData.correctAnswer - 1].correct = true;
@@ -12,7 +13,12 @@
             score++;
         }
     }
-    function next() {}
+    function next() {
+        if (questions.length === currentQuestion) {
+        } else {
+            currentQuestion++;
+        }
+    }
 </script>
 
 <div class="nav-bar">
@@ -40,9 +46,7 @@
     </div>
     {#if isAnswered}
         <div>
-            <button class="next-btn" on:click={next}
-                >Next</button
-            >
+            <button class="next-btn" on:click={next}>Next</button>
         </div>
     {/if}
 </div>
