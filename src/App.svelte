@@ -1,12 +1,13 @@
 <script lang="ts">
   // Components
   import FinishingPage from "./finishingPage.svelte";
+  import StartingPage from "./StartingPage.svelte";
   // Types
   import { questions } from "./data/questions";
   let score = 0;
   let isAnswered = false;
   let currentQuestion = 0;
-  let page = 1;
+  let page = 0;
   $: questionData = questions[currentQuestion];
   function clickHandler(index: number) {
     isAnswered = true;
@@ -33,7 +34,9 @@
     <h4 class="score">Score: {score}</h4>
   {/if}
 </div>
-{#if page == 1}
+{#if page == 0}
+<StartingPage bind:page={page} />
+{:else if page == 1}
   <div class="main">
     <h2 class="question">
       {questionData.question}
